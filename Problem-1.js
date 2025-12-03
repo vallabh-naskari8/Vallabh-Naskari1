@@ -1,56 +1,33 @@
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 class Calculator {
-    constructor(a, b, operation) {
-        this.a = a;
-        this.b = b;
-        this.operation = operation;
-    }
+  calculate(a, b, op) {
+    op = op.toLowerCase();
 
-    calculate() {
-        switch (this.operation) {
-            case "add":
-                return this.a + this.b;
+    if (op === "add") return a + b;
+    if (op === "sub") return a - b;
+    if (op === "mul") return a * b;
+    if (op === "div") return b !== 0 ? a / b : "Error: Cannot divide by 0";
+    if (op === "mod") return a % b;
 
-            case "sub":
-                return this.a - this.b;
-
-            case "mul":
-                return this.a * this.b;
-
-            case "div":
-                if (this.b === 0) {
-                    return "Error: Cannot divide by zero";
-                }
-                return this.a / this.b;
-
-            case "mod":
-                if (this.b === 0) {
-                    return "Error: Cannot modulo by zero";
-                }
-                return this.a % this.b;
-
-            default:
-                return "Invalid operation";
-        }
-    }
+    return "Invalid Operation!";
+  }
 }
 
-let calc1 = new Calculator(10, 5, "add");
-console.log("Addition:", calc1.calculate());
+// Taking dynamic input
+rl.question("Enter value of a: ", (x) => {
+  rl.question("Enter value of b: ", (y) => {
+    rl.question("Enter operation (add/sub/mul/div/mod): ", (op) => {
 
-let calc2 = new Calculator(10, 5, "sub");
-console.log("Subtraction:", calc2.calculate());
+      let calc = new Calculator();
+      console.log(`Result = ${calc.calculate(parseFloat(x), parseFloat(y), op)}`);
 
-let calc3 = new Calculator(10, 5, "mul");
-console.log("Multiplication:", calc3.calculate());
-
-let calc4 = new Calculator(10, 5, "div");
-console.log("Division:", calc4.calculate());
-
-let calc5 = new Calculator(10, 0, "div");
-console.log("Division by zero:", calc5.calculate());
-
-let calc6 = new Calculator(10, 3, "mod");
-console.log("Modulo:", calc6.calculate());
-
-let calc7 = new Calculator(10, 0, "mod");
-console.log("Modulo by zero:", calc7.calculate());
+      rl.close();
+    });
+  });
+});

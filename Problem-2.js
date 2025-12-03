@@ -1,14 +1,18 @@
-function oddSeries(a) {
+const readline = require("readline");
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question("Enter a number: ", function(a) {
+    a = parseInt(a);
     let result = [];
-    for (let i = 0; result.length < a; i++) {
-        if (i % 2 !== 0) result.push(i);
+
+    for (let i = 0; i < a; i++) {
+        result.push(2 * i + 1);
     }
-    return result;
-}
 
-
-console.log(oddSeries(1)); 
-console.log(oddSeries(2)); 
-console.log(oddSeries(3)); 
-console.log(oddSeries(4)); 
-console.log(oddSeries(7)); 
+    console.log("Output:", result.join(", "));
+    rl.close();
+});
